@@ -36,7 +36,7 @@ di bawah ini menunjukkan jumlah anak Indonesia yang tidak bersekolah pada rentan
 tahun 2019-2021.
 '''
 
-data = pd.read_csv('https://github.com/Rangga1708/analisis-data-angka-tidak-sekolah-indonesia/blob/main/AATS%20Pengeluaran.csv', sep = ';')
+data = pd.read_csv('https://raw.githubusercontent.com/Rangga1708/analisis-data-angka-tidak-sekolah-indonesia/main/AATS%20Pengeluaran.csv')
 data['Tahun'] = pd.to_datetime(data['Tahun'], format='%Y')
 
 jenjang = st.selectbox(
