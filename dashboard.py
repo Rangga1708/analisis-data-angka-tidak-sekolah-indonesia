@@ -2,8 +2,12 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from PIL import Image
 
 st.title("Alokasi Dana untuk Pendidikan. Perlukah?")
+
+image = Image.open('Pendidikan.jpg')
+st.image(image)
 
 '''
 Masyarakat Indonesia saat ini dihebohkan dengan keputusan pemerintah untuk
