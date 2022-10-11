@@ -6,7 +6,7 @@ from PIL import Image
 
 st.title("Alokasi Dana untuk Pendidikan. Perlukah?")
 
-image = Image.open('https://github.com/Rangga1708/analisis-data-angka-tidak-sekolah-indonesia/blob/main/Pendidikan.jpg')
+image = Image.open('https://github.com/Rangga1708/analisis-data-angka-tidak-sekolah-indonesia/blob/main/Pendidikan.jpg?raw=true')
 st.image(image)
 
 '''
