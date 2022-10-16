@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from PIL import Image
 
-st.title("Alokasi Dana untuk Pendidikan. Perlukah?")
+st.title("Alokasi Dana untuk Pendidikan, Perlukah?")
 
 image = Image.open('Pendidikan.jpg')
 st.image(image)
@@ -15,6 +15,8 @@ menaikkan harga BBM bersubsidi. Pertalite yang semula dapat dibeli dengan harga
 Rp7.650 per liter naik menjadi Rp10.000 per liter, sedangkan Solar yang semula 
 dapat dibeli seharga Rp5.150 per liter juga naik menjadi Rp6.800 per liter.
 '''
+
+st.header('Mengapa BBM Naik?')
 
 '''
 Walaupun demikian, naiknya harga BBM bukan dilakukan tanpa alasan. Menteri Keuangan Sri Mulyani
@@ -31,6 +33,8 @@ dapat dialokasikan untuk keperluan lainnya. Pertanyaannya adalah akan dialokasik
 ke mana biaya subsidi tersebut?
 '''
 
+st.header('Pendidikan Indonesia Saat Ini')
+
 '''
 Salah satu sektor yang perlu perhatian khusus adalah sektor pendidikan. Ketua 
 Kelompok Kerja Pendidikan G20, Iwan Syahril mengatakan bahwa dunia pendidikan
@@ -42,14 +46,25 @@ tahun 2019-2021.
 
 data = pd.read_csv('https://raw.githubusercontent.com/Rangga1708/analisis-data-angka-tidak-sekolah-indonesia/main/AATS%20Pengeluaran.csv')
 data['Tahun'] = pd.to_datetime(data['Tahun'], format='%Y')
+data['Persentase'] = data['Persentase'].map(lambda x: x/100)
 
 jenjang = st.selectbox(
           'Jenjang:',
           ['SD', 'SMP', 'SMA'])
 subdata = data[data["Jenjang"] == jenjang]
-fig = px.line(subdata, "Tahun", "Persentase", color = "Kelompok",
-              markers = True, title = "Angka Tidak Sekolah Jenjang " + jenjang)
+
+fig = px.line(subdata, "Tahun", "Persentase", 
+              color = "Kelompok",
+              color_discrete_sequence=["#DC1C13", "#EA4C46", "#F07470", "#F1959B", "#F6BDC0"],
+              markers = True, 
+              title = "Angka Tidak Sekolah Jenjang " + jenjang)
+
+fig.update_xaxes(nticks=3, tickformat = '%Y')
+fig.update_yaxes(tickformat = '.01%')
+
 st.plotly_chart(fig, use_container_width=True)
+
+st.subheader('Semakin Tinggi Jenjang Pendidikan, Semakin Banyak yang Tidak Bersekolah')
 
 '''
 Dapat dilihat bahwa persentase anak tidak sekolah untuk jenjang SD berada pada
@@ -59,6 +74,8 @@ tinggi jenjang pendidikannya, semakin banyak anak yang tidak bersekolah. Hal
 ini mungkin disebabkan biaya sekolah yang semakin tinggi untuk jenjang yang 
 semakin tinggi.
 '''
+
+st.subheader('Golongan Masyarakat Dengan Pendapatan Terendah Butuh Perhatian Khusus')
 
 '''
 Dari ketiga jenjang sekolah, dapat dilihat dengan jelas bahwa salah satu kelompok
@@ -80,6 +97,8 @@ persentase dari golongan Kuintil 1 masih berada di atas 1% selama 3 tahun terakh
 Untuk jenjang SMP, persentase dari golongan Kuintil 1 berada di atas 10%, sedangkan
 golongan lainnya berada di bawah 8% selama 3 tahun terakhir.
 '''
+
+st.subheader('Grafik yang Landai Di Tahun 2020-2021')
 
 '''
 Meskipun demikian, terdapat hal yang menarik dari angka tersebut di antara tahun
@@ -119,6 +138,8 @@ yang menyebabkan perubahan jumlah anak tidak sekolah tidak berubah terlalu signi
 meskipun di tengah-tengah pandemi.
 '''
 
+st.header('Kesimpulan')
+
 '''
 Berdasarkan pemaparan yang sudah dituliskan, dapat disimpulkan bahwa perlu adanya
 alokasi dana yang lebih pada sektor pendidikan khususnya untuk masyarakat golongan
@@ -128,7 +149,8 @@ persentase anak tidak sekolah tidak berubah secara signifikan di tengah pandemi,
 bahkan dapat menurunkan angka anak tidak sekolah. 
 '''
 
-st.markdown("### Referensi")
+st.header('Referensi')
+
 '''
 1. https://ekonomi.bisnis.com/read/20220904/44/1573854/resmi-naik-ini-daftar-terbaru-harga-bbm-pertamina-september-2022
 2. https://indonesiabaik.id/videografis/alasan-harga-bbm-naik
